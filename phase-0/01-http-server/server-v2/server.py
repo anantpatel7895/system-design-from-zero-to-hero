@@ -42,6 +42,7 @@ while True:
         f"{client_address}"
     )
 
+
     try:
 
         while True:
@@ -50,8 +51,10 @@ while True:
                 BUFFER_SIZE
             )
 
-            if not data:
+            print(data)
 
+            if not data:
+                print("CLIENT DISCONNECTED")
                 break
 
             request = parse_request(data)
