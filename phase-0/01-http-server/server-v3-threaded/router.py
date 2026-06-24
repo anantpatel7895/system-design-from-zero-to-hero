@@ -2,7 +2,7 @@ from handlers import (
     hello,
     users,
     health,
-    create_user
+    slow
 )
 
 from response import Response
@@ -16,20 +16,23 @@ ROUTES = {
 
     ("GET", "/health"): health,
 
-    ("POST", "/users"): create_user
+    ("GET", "/slow"): slow,
 }
 
 
 def dispatch(request):
 
     handler = ROUTES.get(
-        (request.method, request.path)
+        (
+            request.method,
+            request.path
+        )
     )
 
     if not handler:
 
         return Response(
-            body="Not Found",
+            "Not Found",
             status=404
         )
 

@@ -1,5 +1,5 @@
 import json
-
+import time
 from response import Response
 
 
@@ -38,3 +38,15 @@ def create_user(request):
         body=f"Received: {request.body}",
         status=201
     )
+
+
+
+def slow(request):
+
+    print("START SLOW REQUEST")
+
+    time.sleep(20)
+
+    print("END SLOW REQUEST")
+
+    return Response("Done")
