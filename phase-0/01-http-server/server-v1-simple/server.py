@@ -29,7 +29,7 @@ print(f"HTTP Server Running On {HOST}:{PORT}")
 
 while True:
 
-    client_socket, client_address = server.accept()
+    client_socket, client_address = server.accept() # Main Thread first blocks here until a client connects, then returns a new socket object (client_socket) that can be used to communicate with the client, and the address of the client (client_address).
 
     print(f"Client Connected: {client_address}")
 
@@ -37,7 +37,7 @@ while True:
 
         while True:
 
-            request = client_socket.recv(BUFFER_SIZE)
+            request = client_socket.recv(BUFFER_SIZE) # Main Thread blocks here until data is received from the client. It returns the data received as bytes.
 
             if not request:
                 break

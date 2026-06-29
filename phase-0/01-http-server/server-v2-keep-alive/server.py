@@ -34,8 +34,12 @@ print(f"HTTP Server Running On {HOST}:{PORT}")
 
 
 while True:
-
-    client_socket, client_address = server.accept()
+    print("\nWaiting for client at the accept() call...")
+    client_socket, client_address = server.accept() # blocking call
+    """
+    Accepts a connection from a client. This is a **blocking call**, meaning the server will wait here until a client connects.
+    Once a client connects, it returns a new socket object (client_socket) that can be used to communicate with the client, and the address of the client (client_address).
+    """
 
     print(
         f"\nClient Connected: "
@@ -47,9 +51,17 @@ while True:
 
         while True:
 
+            print(
+                f"\nWaiting for data from "
+                f"{client_address} at the recv() call..."
+            )
+
             data = client_socket.recv(
                 BUFFER_SIZE
             )
+            """
+            Receives data from the client. This is a **blocking call**, meaning the server will wait here until data is received.
+            """
 
             print(data)
 

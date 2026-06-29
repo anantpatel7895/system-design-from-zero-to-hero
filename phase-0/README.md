@@ -1,0 +1,1 @@
+- always keep in mind `accept` and `recv` are blocking calls (means event-driven resumed by OS). If you call them in the main thread, they will block the entire server from processing other clients.

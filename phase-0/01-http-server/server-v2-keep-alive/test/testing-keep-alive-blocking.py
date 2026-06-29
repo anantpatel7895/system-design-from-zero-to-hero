@@ -12,7 +12,7 @@ def client1():
     print("CLIENT1 CONNECTING") 
     print("=" * 60) 
     sock = socket.socket( socket.AF_INET, socket.SOCK_STREAM ) 
-    sock.connect((HOST, PORT)) # 3-way handshake
+    sock.connect((HOST, PORT)) # 3-way handshake, don't guarantee that server will accept connection immediately, it may be busy with other clients
     print("CLIENT1 CONNECTED") 
     request = ( "GET /hello HTTP/1.1\r\n" "Host: localhost\r\n" "\r\n" ) 
     print("\nCLIENT1 -> REQUEST 1") 
@@ -52,13 +52,14 @@ def client2():
     sock.close() 
 
 
-thread1 = threading.Thread( target=client1 ) 
-thread2 = threading.Thread( target=client2 ) 
-thread1.start() 
-thread2.start() 
-thread1.join() 
-thread2.join()
+# thread1 = threading.Thread( target=client1 ) 
+# thread2 = threading.Thread( target=client2 ) 
+# thread1.start() 
+# thread2.start() 
+# thread1.join() 
+# thread2.join()
 
+client1()
 
 """bash
 $ python3 testing-keep-alive-blocking.py

@@ -107,7 +107,7 @@ server_socket.bind(
 
 server_socket.listen(100)
 
-server_socket.setblocking(False)
+server_socket.setblocking(False) # Set the socket to non-blocking mode, allowing the server to handle multiple connections concurrently without blocking on any one connection.
 
 selector.register(
     server_socket,
@@ -155,3 +155,40 @@ while True:
         callback(
             key.fileobj
         )
+
+"""
+
+When the server calls `selector.select()`, the main thread waits until something interesting happens on one of the registered sockets.
+While waiting, the thread does not continuously check the sockets. Instead, the operating system puts the thread to sleep, allowing the CPU to be used by other programs or threads.
+Later, when a client connects or sends data, the operating system detects that one of the registered sockets is ready. It then wakes up the sleeping thread and makes `selector.select()` return.
+The event loop can now see which socket is ready and call the appropriate function, such as:
+
+* `accept_connection()` for a new incoming connection
+* `handle_client()` when a client sends data
+
+This approach is efficient because the server does not waste CPU time repeatedly checking every socket. It sleeps when there is no work to do and wakes up only when an event occurs.
+
+
+                 selector
+
+                      │
+                      ▼
+
+            selector.select()
+
+                      │
+         ┌────────────┴────────────┐
+         │                         │
+         ▼                         ▼
+
+server_socket              client_socket
+(readable)                 (readable)
+
+new connection             data arrived
+
+         │                         │
+         ▼                         ▼
+
+accept_connection()       handle_client()
+
+"""
