@@ -75,9 +75,8 @@ ACK ----------->
 
 Connection Established
 
-Linux Kernel performs the handshake.
-
-Python never performs the handshake.
+> Linux Kernel performs the handshake.
+> Python never performs the handshake.
 
 ---
 

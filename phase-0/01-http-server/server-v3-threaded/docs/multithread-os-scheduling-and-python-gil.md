@@ -170,9 +170,8 @@ Program Counter
 
 Answer:
 
-```text
-Operating System Scheduler
-```
+> Operating System Scheduler
+
 
 Not Python.
 

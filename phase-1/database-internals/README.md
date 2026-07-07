@@ -88,3 +88,28 @@ Experiment 08 — Session lifecycle vs transaction lifecycle vs connection lifec
     ├── question-answer.md
     │
     └── README.md
+
+02-inventory-reservation/
+
+Experiment 01
+Naive Purchase (Overselling)
+
+↓
+
+Experiment 02
+SELECT FOR UPDATE
+
+↓
+
+Experiment 03
+Concurrent Buyers
+
+↓
+
+Experiment 04
+Reservation Timeout
+
+↓
+
+Experiment 05
+Production Benchmark

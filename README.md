@@ -1,5 +1,7 @@
 # system-design-from-zero-to-hero
 
+> Every update statement acquire a row lock
+
 
 ## in between
 
@@ -22,3 +24,7 @@ Connection Pooling
 Replication
 
 At that point, the explanations will make much more sense because you'll have a real application to relate them to.
+
+# IMPORTANT DOCS
+
+- [Multithreading, OS Scheduling, and the Python GIL](phase-0/01-http-server/server-v3-threaded/docs/multithread-os-scheduling-and-python-gil.md)

@@ -13,7 +13,7 @@ Session = sessionmaker(bind=engine)
 db = Session()
 
 print("=" * 60)
-print("Transaction A")
+print("Transaction B")
 print("=" * 60)
 
 input("Press ENTER to execute UPDATE...")

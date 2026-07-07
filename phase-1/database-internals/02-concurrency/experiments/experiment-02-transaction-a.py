@@ -21,6 +21,18 @@ input("Press ENTER to execute UPDATE...")
 db.execute(
     text("""
         UPDATE urls
+        SET click_count =  1
+        WHERE id = 1
+         """
+    )
+)
+
+print("simple update also acquire row lock")
+input("Press Enter to go ahead")
+
+db.execute(
+    text("""
+        UPDATE urls
         SET click_count = click_count + 1
         WHERE id = 1
     """)
