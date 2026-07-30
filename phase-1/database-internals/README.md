@@ -42,6 +42,8 @@ Experiment 08 — Session lifecycle vs transaction lifecycle vs connection lifec
 ├── question-answer.md
 └── README.md
 
+# Production patttern
+
 03-production-patterns/
 │
 ├── 01-high-concurrency-counter/
@@ -52,6 +54,7 @@ Experiment 08 — Session lifecycle vs transaction lifecycle vs connection lifec
 ├── 06-outbox-pattern/
 └── README.md
 
+## High Concurrence Counter
 
 01-high-concurrency-counter/
 │
@@ -89,27 +92,67 @@ Experiment 08 — Session lifecycle vs transaction lifecycle vs connection lifec
     │
     └── README.md
 
+## Inventory Reservation
+
 02-inventory-reservation/
+│
+├── app/
+│   ├── config.py
+│   ├── db.py
+│   ├── repository.py
+│   ├── service.py
+│   └── models.py
+│
+├── experiments/
+│   ├── experiment-01-naive-purchase.py
+│   ├── experiment-02-concurrent-buyers.py
+│   ├── experiment-03-select-for-update.py
+│   ├── experiment-04-reservation-timeout.py
+│   ├── experiment-05-high-concurrency.py
+│   └── experiment-06-production-pattern.py
+│
+├── observations/
+│
+├── question-answer.md
+│
+└── README.md
 
-Experiment 01
-Naive Purchase (Overselling)
+# Evolution of Background Processing
+```text
+Level 1  ✅ Manual Cleanup
 
 ↓
 
-Experiment 02
-SELECT FOR UPDATE
+Level 2  ✅ Polling Worker
+            (what you've built)
 
 ↓
 
-Experiment 03
-Concurrent Buyers
+Level 3
+Cron Scheduler
 
 ↓
 
-Experiment 04
-Reservation Timeout
+Level 4
+Distributed Scheduler
 
 ↓
 
-Experiment 05
-Production Benchmark
+Level 5
+Event-Driven Worker
+
+↓
+
+Level 6
+Message Queue (Kafka/RabbitMQ/SQS)
+```
+# comparision
+
+| Pattern                  | Database   | Redis       | Kafka                          |
+| ------------------------ | ---------- | ----------- | ----------------------------   |
+| High-concurrency counter | ✅ Yes      | ✅ Excellent | ❌ Rare                       |
+| Inventory reservation    | ✅ Yes      | ✅ Sometimes | ❌ Usually not                |
+| Money transfer           | ✅ Required | ❌ No        | ❌ No                         |
+| Job queue                | ✅ Possible | ✅ Common    | ✅ Common                     |
+| Idempotency              | ✅ Yes      | ✅ Excellent | ✅ Consumer-side              |
+| Outbox pattern           | ✅ Required | ❌ No        | ✅ Usually publishes to Kafka |

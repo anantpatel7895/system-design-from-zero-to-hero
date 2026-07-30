@@ -1,6 +1,7 @@
 # system-design-from-zero-to-hero
 
 > Every update statement acquire a row lock
+> on every commit trasaction completed, 
 
 
 ## in between
