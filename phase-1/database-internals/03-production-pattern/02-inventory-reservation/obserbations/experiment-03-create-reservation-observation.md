@@ -265,7 +265,7 @@ This design minimizes lock contention while preserving inventory consistency.
 
 Although inventory is now reserved correctly, another problem still exists.
 
-Suppose the customer never completes payment.
+> Suppose the customer never completes payment.
 
 ```text
 Reservation

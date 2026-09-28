@@ -30,7 +30,7 @@ COMMIT
 
 ### Question
 
-How long does a typical customer take to complete payment?
+> How long does a typical customer take to complete payment?
 
 Usually:
 
@@ -318,7 +318,7 @@ Reservation
 EXPIRED
 ```
 
-A background worker periodically executes:
+A **background worker** periodically executes:
 
 ```text
 Increase Stock

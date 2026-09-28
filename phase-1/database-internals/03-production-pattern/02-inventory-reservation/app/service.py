@@ -13,6 +13,11 @@ class ProductService:
         product_id: int,
     ):
 
+        """
+        Purchase a product by reducing its stock by 1.
+        READ -> Modify -> WRITE
+        """
+
         stock = self.repository.get_stock(
             db,
             product_id,
@@ -54,8 +59,6 @@ class ProductService:
         )
 
         print(f"Current Stock = {stock}")
-
-        
 
         if stock <= 0:
 

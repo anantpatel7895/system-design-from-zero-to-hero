@@ -146,6 +146,7 @@ Event-Driven Worker
 Level 6
 Message Queue (Kafka/RabbitMQ/SQS)
 ```
+
 # comparision
 
 | Pattern                  | Database   | Redis       | Kafka                          |
