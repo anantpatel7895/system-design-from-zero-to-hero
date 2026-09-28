@@ -104,6 +104,7 @@ Before running Python
 ```text
 Connections:
 __________
+10
 ```
 
 ---
@@ -119,6 +120,7 @@ engine = create_engine(...)
 ```text
 Connections:
 __________
+10
 ```
 
 ---
@@ -134,6 +136,7 @@ db = SessionLocal()
 ```text
 Connections:
 __________
+10
 ```
 
 ---
@@ -149,6 +152,7 @@ db.execute(text("SELECT 1"))
 ```text
 Connections:
 __________
+11
 ```
 
 Also observe:

@@ -173,10 +173,10 @@ Connections:
 After create_engine():
 
 Connections:
-?
+0
 
 Conclusion:
-?
+0
 ```
 
 Do not fill in the answers based on assumptions. Record only the behavior observed on your machine.

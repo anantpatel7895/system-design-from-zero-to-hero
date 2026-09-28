@@ -73,7 +73,7 @@ Creating a SQLAlchemy Session does not immediately acquire a database connection
 db.execute(text("SELECT 1"))
 ```
 
-### SQLAlchemy Log
+### SQLAlchemy Log in the terminal of python program
 
 ```text
 select pg_catalog.version()
