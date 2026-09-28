@@ -12,7 +12,7 @@ class CounterRepository:
             """),
             {"id": url_id},
         )
-
+        #  Not Committing here, will commit it in **update_count**
         return result.scalar()
 
     def update_count(
@@ -33,7 +33,8 @@ class CounterRepository:
                 "value": value,
             },
         )
-
+        # Here we are committing the transaction after updating the count in the database. This ensures that the changes are saved and visible to other transactions.   
+        # db transaction are completed when we call db.commit() and the changes are persisted to the database. If we don't call db.commit(), the changes will not be saved and will be lost when the session is closed or rolled back.
         db.commit()
 
     def atomic_increment(
