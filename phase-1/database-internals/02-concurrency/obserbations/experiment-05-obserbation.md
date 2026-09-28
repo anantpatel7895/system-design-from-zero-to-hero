@@ -47,7 +47,7 @@ FOR UPDATE
 
 * SQLAlchemy started a transaction.
 * PostgreSQL successfully returned the row.
-* PostgreSQL acquired a row-level lock.
+* PostgreSQL acquired a **row-level lock**.
 * Transaction A remained open while waiting for COMMIT.
 
 Application output:
@@ -257,7 +257,7 @@ Behavior:
 
 * `SELECT ... FOR UPDATE` is fundamentally different from a normal `SELECT`.
 * A normal `SELECT` uses MVCC and does not block on row locks.
-* `SELECT ... FOR UPDATE` explicitly acquires a row-level lock.
+* `SELECT ... FOR UPDATE` **explicitly acquires a row-level lock**.
 * If another transaction already holds the lock, PostgreSQL suspends the second transaction until the first transaction commits or rolls back.
 * Lock waits are visible in `pg_stat_activity` through:
 

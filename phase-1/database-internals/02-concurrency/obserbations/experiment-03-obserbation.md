@@ -56,7 +56,7 @@ WHERE id = 1;
 ### Observation
 
 * SQLAlchemy started an implicit transaction.
-* PostgreSQL acquired a row-level lock on the updated row.
+* PostgreSQL acquired a **row-level lock** on the updated row.
 * The transaction remained open while waiting for `COMMIT`.
 
 At this point:
@@ -117,7 +117,7 @@ COMMIT;
 
 The transaction completed successfully.
 
-The row-level lock was released.
+The **row-level lock** was released.
 
 The updated row became the latest committed version.
 
@@ -238,7 +238,7 @@ This behavior is implemented using PostgreSQL's **Multi-Version Concurrency Cont
 
 # Key Learnings
 
-* A normal `SELECT` does not block when another transaction holds a row-level lock.
+* A normal `SELECT` does not block when another transaction holds a **row-level lock**.
 * Readers do not wait for uncommitted writers.
 * Readers see the most recent committed version of the row.
 * Uncommitted changes remain visible only to the transaction that made them.

@@ -8,7 +8,7 @@ This experiment answers the following questions:
 
 * What happens if `commit()` is never called?
 * Does `db.close()` automatically call `COMMIT`?
-* Does `db.close()` automatically call `ROLLBACK`?
+* Does `db.close()` automatically call `ROLLBACK`? 
 * Are uncommitted changes visible to other database sessions?
 
 ---
@@ -66,7 +66,26 @@ WHERE id = 1
 
 ### Conclusion
 
-The first SQL statement automatically starts a transaction.
+> SQLAlchemy automatically begins a transaction when the first SQL operation requires one.
+
+```text
+STEP 1 : Read Current Value
+============================================================
+2026-09-27 16:20:07,159 INFO sqlalchemy.engine.Engine select pg_catalog.version()
+2026-09-27 16:20:07,159 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-27 16:20:07,160 INFO sqlalchemy.engine.Engine select current_schema()
+2026-09-27 16:20:07,160 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-27 16:20:07,160 INFO sqlalchemy.engine.Engine show standard_conforming_strings
+2026-09-27 16:20:07,160 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-27 16:20:07,160 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-09-27 16:20:07,160 INFO sqlalchemy.engine.Engine 
+        SELECT click_count
+        FROM urls
+        WHERE id = 1
+    
+2026-09-27 16:20:07,160 INFO sqlalchemy.engine.Engine [generated in 0.00004s] {}
+100000
+```
 
 ---
 
@@ -296,7 +315,8 @@ This experiment demonstrates several important PostgreSQL behaviors:
 ---
 
 # Key Learnings
-
+* in one transaction, we can make exedcute multiple SQL statements, but until we call `commit()`, the changes are not persisted to the database.
+* in one backend process (connection or session), we can have multiple transactions, but only one transaction can be active at a time.
 * SQLAlchemy starts an implicit transaction on the first SQL statement.
 * PostgreSQL keeps the transaction open until it receives either `COMMIT` or `ROLLBACK`.
 * `db.close()` is a safe operation because it prevents accidental persistence of uncommitted changes.

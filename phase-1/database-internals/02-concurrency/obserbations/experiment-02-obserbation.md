@@ -55,7 +55,7 @@ WHERE id = 1;
 ### Observation
 
 * SQLAlchemy started an implicit transaction.
-* PostgreSQL acquired a row-level lock on the row.
+* PostgreSQL acquired a **row-level lock** on the row.
 * The UPDATE executed successfully.
 * The transaction remained open until COMMIT.
 
@@ -93,7 +93,7 @@ db.commit()
 
 After Transaction A committed:
 
-* The row-level lock was released.
+* The **row-level lock** was released.
 * PostgreSQL allowed Transaction B to continue executing its UPDATE.
 
 ---
@@ -256,7 +256,7 @@ No update was lost.
 # Key Learnings
 
 * `UPDATE column = column + 1` is an atomic database operation.
-* PostgreSQL automatically acquires a row-level lock during an UPDATE.
+* PostgreSQL automatically acquires a **row-level lock** during an UPDATE and delete operations.
 * Concurrent UPDATE statements on the same row are serialized.
 * The second transaction waits until the first transaction releases the lock.
 * PostgreSQL re-evaluates the UPDATE using the latest committed row.
