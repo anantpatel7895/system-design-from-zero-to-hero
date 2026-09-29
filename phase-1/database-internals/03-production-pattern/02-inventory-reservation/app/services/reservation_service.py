@@ -6,6 +6,8 @@ from time import perf_counter
 
 from app.dtos.reservation_result import ReservationResult
 
+from app.events.events import ReservationCreated
+from app.events.event_publisher import EventPublisher
 
 class ReservationService:
 
@@ -14,6 +16,7 @@ class ReservationService:
         self.product_repository = ProductRepository()
 
         self.reservation_repository = ReservationRepository()
+        self.event_publisher = EventPublisher()
 
     def reserve(
         self,
@@ -53,7 +56,7 @@ class ReservationService:
 
         expires_at = datetime.utcnow() + + timedelta(seconds=expire_after_seconds,)
 
-        self.reservation_repository.create(
+        reservation_id = self.reservation_repository.create(
             db=db,
             product_id=product_id,
             user_id=user_id,
@@ -62,6 +65,24 @@ class ReservationService:
         )
 
         db.commit()
+
+        # ====================================================
+        # Event Creation
+        # ====================================================
+
+        event = ReservationCreated(
+            reservation_id=reservation_id,
+            product_id=product_id,
+            user_id=user_id,
+            quantity=quantity,
+            occurred_at=datetime.utcnow(),
+        )
+
+        # ====================================================
+        # Event Publishing
+        # ====================================================
+
+        self.event_publisher.publish(event)
 
         elapsed = (perf_counter() - start) * 1000
 

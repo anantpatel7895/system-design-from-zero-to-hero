@@ -12,7 +12,7 @@ class ReservationRepository:
         expires_at,
     ):
 
-        db.execute(
+        result = db.execute(
             text("""
                 INSERT INTO inventory_reservations
                 (
@@ -30,6 +30,7 @@ class ReservationRepository:
                     'RESERVED',
                     :expires_at
                 )
+                RETURNING id
             """),
             {
                 "product_id": product_id,
@@ -38,6 +39,10 @@ class ReservationRepository:
                 "expires_at": expires_at,
             },
         )
+
+        reservation_id = result.scalar_one()
+
+        return reservation_id
 
     def get_all(
         self,
