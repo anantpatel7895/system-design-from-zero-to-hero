@@ -3,6 +3,7 @@ from pydantic import HttpUrl
 from pydantic import Field
 from datetime import datetime
 
+# Request and Response Schemas for URL Shortener
 
 class URLCreate(BaseModel):
     original_url: HttpUrl
